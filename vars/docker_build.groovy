@@ -1,3 +1,3 @@
-def call(String ProjectName, String ImageTag, String ACrName){
-  sh "docker build -t ${Project}:${ImageTag} ${acrName}.azurecr.io/${Project}:${ImageTag} ."
+def call(String ProjectName, String ImageTag, String AcrName){
+  sh "docker build -t ${Project}:${ImageTag} ${AcrName}.azurecr.io/${Project}:${ImageTag} ."
 }
