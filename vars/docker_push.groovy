@@ -1,6 +1,8 @@
-def call(String Project, String ImageTag, String dockerhubuser){
-    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPass', usernameVariable: 'dockerhubUser')]) {
-        sh "docker login -u ${dockerhubuser} -p ${dockerhubpass}"
+def call(String Project, String ImageTag, String acrName) {
+    withCredentials([usernamePassword(credentialsId: 'acr-credentials', usernameVariable: 'acrUser', passwordVariable: 'acrPass')]) {
+        sh """
+        echo "${acrPass}" | docker login ${acrName}.azurecr.io -u "${acrUser}" --password-stdin
+        docker push ${acrName}.azurecr.io/${Project}:${ImageTag}
+        """
     }
-    sh "docker push ${dockerhubuser}/${Project}:${ImageTag}"
 }
