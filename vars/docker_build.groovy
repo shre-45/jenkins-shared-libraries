@@ -1,6 +1,2 @@
-def docker_build(app, tag, path) {
-    dir(path) {
-        sh "docker build -t ${app}:${tag} ."
-    }
-}
-
+def call(String ProjectName, String ImageTag, String ServicePath){
+  sh "docker build -t ${ProjectName}:${ImageTag} ${ServicePath}"
